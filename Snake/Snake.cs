@@ -44,7 +44,7 @@ namespace Snake
 	    internal bool IsHitTail()
 	    {
 		    var head = _pointsList.Last();
-		    for (int i = 0; i < _pointsList.Count; i++)
+		    for (int i = 0; i < _pointsList.Count-2; i++)
 		    {
 			    if (head.IsHit(_pointsList[i]))
 				    return true;

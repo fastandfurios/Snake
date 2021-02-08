@@ -8,15 +8,9 @@ namespace Snake
 	{
 		static void Main(string[] args)
 		{
+			Walls walls = new Walls(80, 25);
+			walls.Draw();
 			
-			var upLine = new HorizontalLine(0, 78, 0, '+');
-			var downLine = new HorizontalLine(0, 78, 24, '+');
-			var leftLine = new VerticalLine(0, 24, 0, '+');
-			var rightLine = new VerticalLine(0, 24, 78, '+');
-			upLine.Draw();
-			downLine.Draw();
-			leftLine.Draw();
-			rightLine.Draw();
 
 			var point = new Point(4, 5, '*');
 			var snake = new Snake(point, 4, Direction.RIGHT);
@@ -25,14 +19,22 @@ namespace Snake
 			FoodCreator foodCreator = new FoodCreator(80, 25, '$');
 			Point food = foodCreator.CreatorFood();
 			food.Draw();
-
+			
 			while (true)
 			{
-				
-			}
+				if(walls.IsHit(snake) || snake.IsHitTail())
+					break;
 
-			while (true)
-			{
+				if (snake.Eat(food))
+				{
+					food = foodCreator.CreatorFood();
+					food.Draw();
+				}
+				else
+					snake.Move();
+
+				Thread.Sleep(100);
+
 				if (Console.KeyAvailable)
 				{
 					ConsoleKeyInfo key = Console.ReadKey();

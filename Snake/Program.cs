@@ -22,6 +22,15 @@ namespace Snake
 			var snake = new Snake(point, 4, Direction.RIGHT);
 			snake.Draw();
 
+			FoodCreator foodCreator = new FoodCreator(80, 25, '$');
+			Point food = foodCreator.CreatorFood();
+			food.Draw();
+
+			while (true)
+			{
+				
+			}
+
 			while (true)
 			{
 				if (Console.KeyAvailable)
